@@ -2,6 +2,15 @@ import React, {Component} from 'react';
 
 import Auxilery from '../../HOC/Auxilery';
 import Burger from '../../components/Burger/Burger';
+import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+
+
+const INGREDIENT_PRICES = {
+    salad: 0.5,
+    cheese: 1,
+    meat: 2,
+    bacon: 1
+};
 
 class BurgerBuilder extends Component {
     /* constructor(props) {
@@ -15,14 +24,59 @@ class BurgerBuilder extends Component {
             bacon: 0,
             cheese: 0,
             meat: 0
-        }
+        },
+        totalPrice: 2
     };
 
+    addIngredientHandler = type => {
+        const oldCount = this.state.ingredients[type];
+        this.setState( prevState => {
+            const oldCount = prevState.ingredients[type];
+            let updatedIngredient = {...prevState.ingredients};
+            updatedIngredient[type] = oldCount + 1;
+            const priceAddition = INGREDIENT_PRICES[type];
+            const newPrice = prevState.totalPrice + priceAddition;
+            return { 
+                ingredients: updatedIngredient,
+                totalPrice: newPrice
+            }
+        });
+    }
+
+    removeIngredientHandler = type => {
+        this.setState( prevState => {
+            const oldCount = prevState.ingredients[type];
+            if(oldCount <=0) {
+                return;
+            }
+            const newCount = oldCount - 1;
+            let updatedIngredient = {...prevState.ingredients};
+            updatedIngredient[type] = newCount;
+            const oldPrice = prevState.totalPrice;
+            const newPrice = prevState.totalPrice - INGREDIENT_PRICES[type];
+            return({
+                ingredients: updatedIngredient,
+                totalPrice: newPrice
+            });
+        });
+    }
+
     render() {
+        const disabledInfo = {
+            ...this.state.ingredients
+        };
+        for(let key in disabledInfo) {
+            disabledInfo[key] = disabledInfo[key] <= 0;
+        }
         return(
             <Auxilery>
                 <Burger ingredients={this.state.ingredients} />
-                <div>Build Control</div>
+                <BuildControls 
+                    ingredientAdded={this.addIngredientHandler}
+                    ingredientRemoved={this.removeIngredientHandler}
+                    disabled={disabledInfo}
+                    price={this.state.totalPrice}
+                />
             </Auxilery>
         );
     }
