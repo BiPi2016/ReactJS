@@ -51,6 +51,9 @@ class BurgerBuilder extends Component {
     purchaseCancelledHandler = () => {
         this.setState({purchasing: false});
     }
+    purchaseContinueHandler = () => {
+        alert('Yet to be implemented');
+    }
 
     addIngredientHandler = type => {
         const oldCount = this.state.ingredients[type];
@@ -100,7 +103,10 @@ class BurgerBuilder extends Component {
                 <Modal
                  show={this.state.purchasing}
                  purchaseCancelledHandler={this.purchaseCancelledHandler}>
-                    <OrderSummary ingredients={this.state.ingredients} />
+                    <OrderSummary
+                     ingredients={this.state.ingredients} 
+                     purchaseCancelledHandler={this.purchaseCancelledHandler}
+                     purchaseContinueHandler={this.purchaseContinueHandler}/>
                 </Modal>
                 <BuildControls 
                     ingredientAdded={this.addIngredientHandler}
