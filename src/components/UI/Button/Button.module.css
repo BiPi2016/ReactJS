@@ -9,17 +9,20 @@
     margin: 10px;
     font-weight: bold;
     text-transform: uppercase;
+    border: 1px solid;
+    border-radius: 5px;
 }
 
 .Button:first-of-type {
     margin-left: 0;
-    padding-left: 0;
 }
 
 .Success {
     color: #5C9210;
+    border-color: #5C9210;
 }
 
 .Danger {
     color: #944317;
+    border-color: #944317;
 }

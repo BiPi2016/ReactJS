@@ -16,6 +16,12 @@ const OrderSummary = props => {
             <ul>
                 {ingredientSummary}
             </ul>
+            <p style={{
+                color: 'blue'
+            }}>
+                Total price: 
+                <strong>{` ${props.totalPrice} $`}</strong>
+            </p>
             <Button
              type="Danger"
              clicked={props.purchaseCancelledHandler}>
