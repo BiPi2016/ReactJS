@@ -11,7 +11,7 @@ const Sidedrawer = props => {
             <div className={classes.Logo}>
                 <Logo />
             </div>            
-            <nav>
+            <nav className={}>
                 <NavigationItems />
             </nav>
         </div>
